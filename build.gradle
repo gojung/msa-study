@@ -1,30 +1,39 @@
-plugins {
-    id 'org.springframework.boot' version '2.4.8'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'java'
+buildscript {
+    ext {
+        springBootVersion = '2.4.8'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE"
+    }
+}
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    group = 'com.study'
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = 1.8
 }
 
-group = 'com.study'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+subprojects{
 
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
     }
 }
 
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
-
-test {
-    useJUnitPlatform()
+project(':app:module-api') {
+    dependencies {
+        compile project(':app:module-common')
+    }
 }
