@@ -1,4 +1,4 @@
 rootProject.name = 'msa'
 
 //include modules
-include 'app:module-api', 'app:module-core', 'app:module-common'
+include 'app:module-api', 'app:module-common'
