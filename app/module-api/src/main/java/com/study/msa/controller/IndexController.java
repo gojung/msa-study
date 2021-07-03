@@ -11,7 +11,7 @@ public class IndexController {
 
     private final AccountService accountService;
     @GetMapping("/")
-    public String returnUserName(){
+    public Long returnUserName(){
         return accountService.saveUser();
     }
 }

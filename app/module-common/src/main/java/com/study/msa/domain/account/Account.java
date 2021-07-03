@@ -16,7 +16,7 @@ public class Account {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Long userId;
 
     @Column
     private String userName;

@@ -8,13 +8,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
-public class AccountService {
+public class AccountService{
 
     private final AccountRepository accountRepository;
 
     @Transactional
-    public String saveUser(){
+    public Long saveUser(){
         Account account = Account.builder().userName("gojung").build();
-        return accountRepository.save(account).getUserName();
+        return accountRepository.save(account).getUserId();
+    }
+
+    @Transactional
+    public Long deleteUser(Long id){
+        accountRepository.deleteById(id);
+        return id;
     }
 }
